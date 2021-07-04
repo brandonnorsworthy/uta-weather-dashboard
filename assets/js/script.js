@@ -43,9 +43,11 @@ function displayCurrentWeather(cityName, currentWeather) {
     //city name
     console.log(`City Name: `, cityName);
     //date
-
+    console.log(`Date: `, moment().format(`M/D/YYYY`));
     //icon of weather conditions
-
+    var imgEl = document.createElement(`img`);
+    imgEl.setAttribute(`src`, `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`);
+    document.querySelector(`body`).appendChild(imgEl)
     //temp
     console.log(`Temp: `, currentWeather.temp);
     //humidity
