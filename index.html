@@ -14,28 +14,29 @@
         <h1 class="col-12 pb-4 pt-2">Weather Dashboard</h1>
     </header>
     <main class="row">
-        <div class="col-3 pl-4">
-            <!-- search -->
-            <div>
-                <!-- search for a city -->
-                <h1 class="row pl-3">Search for a City:</h1>
-                <div class="input-group">
-                    <div class="row">
-                        <input type="password" class="form-control" id="inputCity" placeholder="San Diego">
-                    </div>
-                    <div class="row">
-                        <button type="submit" class="btn btn-primary">Confirm identity</button>
-                    </div>
+        <!-- search -->
+        <div class="col-3 pl-4 pr-4">
+            <!-- search for a city -->
+            <h1 class="row ml-1 mr-1">Search for a City:</h1>
+            <form class="row ml-1 mr-1 pb-3" style="border-bottom: 1px solid;">
+                <div class="form-group" style="width:100%;">
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="San Diego" style="width:100%;">
                 </div>
-            </div>
-            <div>
-                <!-- history of previous  -->
+                <button type="submit" class="col-12 btn btn-primary">Search</button>
+            </form>
+            <!-- history of previous  -->
+            <div class="row ml-1 mr-1" id="previousSearches">
+                <button type="button" class="col-12 mt-3 btn btn-secondary">Houston</button>
+                <button type="button" class="col-12 mt-3 btn btn-secondary">Houston</button>
+                <button type="button" class="col-12 mt-3 btn btn-secondary">Houston</button>
+                <button type="button" class="col-12 mt-3 btn btn-secondary">Houston</button>
+                <button type="button" class="col-12 mt-3 btn btn-secondary">Houston</button>
             </div>
         </div>
-        <div class="col-9" id="cityWeatherContainer" style="display: none;">
         <!-- city information -->
+        <div class="col-9" id="cityWeatherContainer" style="display: none;">
+            <!-- current infor -->
             <div class="row pl-2 pt-1 mr-3" style="border:1px solid">
-                <!-- current infor -->
                 <div class="col-12" id="currentWeatherContainer">
                     <div class="row">
                         <h1>
@@ -52,7 +53,8 @@
                     <p class="row">UV Index:&nbsp<span id="currentWeatherUV">11.49</span></p>
                 </div>
             </div>
-            <div class="row mt-4 mr-3" style="background:red"> <!-- 5 day forcast -->
+            <!-- 5 day forcast -->
+            <div class="row mt-4 mr-3" style="background:red"> 
                 <div class="col-12" id="futureWeatherContainer">
                     <h2 class="row">5-Day Forecast:</h2>
                     <div class="row">

@@ -3,8 +3,6 @@
 var openWeatherAppId = `2c4a921d55c896205bdca23294d0393d`
 
 // search => presented with current and future conditions
-// uv index => color indicating favorable, moderate, severe
-
 // search history => when click presented with current and future conditions for that city
 
 //? current weather data
@@ -46,9 +44,11 @@ function displayCurrentWeather(cityName, currentWeather) {
     $(`#currentWeatherHumidity`).html(currentWeather.humidity) //humidity
     $(`#currentWeatherWind`).html(currentWeather.wind_speed) //windspeed
     $(`#currentWeatherUV`).html(currentWeather.uvi) //uv index
-    if (currentWeather.uvi > 10) {
+
+    // uv index => color indicating favorable, moderate, severe
+    if (currentWeather.uvi > 6) {
         $(`#currentWeatherUV`).css(`background`, `#aa2020`)
-    } else if (currentWeather.uvi > 5) {
+    } else if (currentWeather.uvi > 4) {
         $(`#currentWeatherUV`).css(`background`, `#aa6a20`)
     } else {
         $(`#currentWeatherUV`).css(`background`, `#40aa20`)
