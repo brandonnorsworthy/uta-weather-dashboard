@@ -4,7 +4,7 @@ var openWeatherAppId = `2c4a921d55c896205bdca23294d0393d`
 
 // search => presented with current and future conditions
 // uv index => color indicating favorable, moderate, severe
-// future cards => 5 days, date, icon of weather conditions, temp, wind speed, humidity
+
 // search history => when click presented with current and future conditions for that city
 
 //? current weather data
@@ -31,34 +31,21 @@ function callOneCallAPI(cityName, longitude, latitude) {
     fetch(url)
     .then(response => response.json())
     .then(data => {
-        // console.log(`callOneCallAPI: `, data);
+        console.log(`callOneCallAPI: `, data);
         displayCurrentWeather(cityName, data.current);
+        displayWeekForecast(data.daily)
     });
 }
 
 function displayCurrentWeather(cityName, currentWeather) {
-    // console.log(`displayCurrentWeather: `, currentWeather);
     // current conditions => city name, date, icon of weather conditions, temp, humidity, wind speed, uv index
-    //city name
-    $(`#currentWeatherName`).html(cityName);
-    // console.log(`City Name: `, cityName);
-    //date
-    $(`#currentWeatherDate`).html(moment().format(`M/D/YYYY`))
-    // console.log(`Date: `, moment().format(`M/D/YYYY`));
-    //icon of weather conditions
-    $(`#currentWeatherIcon`).attr(`src`, `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`);
-    // document.querySelector(`body`).appendChild(imgEl)
-    //temp
-    $(`#currentWeatherTemp`).html(currentWeather.temp)
-    // console.log(`Temp: `, currentWeather.temp);
-    //humidity
-    $(`#currentWeatherHumidity`).html(currentWeather.humidity)
-    // console.log(`Humidity: `, currentWeather.humidity);
-    //windspeed
-    $(`#currentWeatherWind`).html(currentWeather.wind_speed)
-    // console.log(`Wind Speed: `, currentWeather.wind_speed);
-    //uv index
-    $(`#currentWeatherUV`).html(currentWeather.uvi)
+    $(`#currentWeatherName`).html(cityName); //city name
+    $(`#currentWeatherDate`).html(moment().format(`M/D/YYYY`)) //date
+    $(`#currentWeatherIcon`).attr(`src`, `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`); //icon of weather conditions
+    $(`#currentWeatherTemp`).html(currentWeather.temp) //temp
+    $(`#currentWeatherHumidity`).html(currentWeather.humidity) //humidity
+    $(`#currentWeatherWind`).html(currentWeather.wind_speed) //windspeed
+    $(`#currentWeatherUV`).html(currentWeather.uvi) //uv index
     if (currentWeather.uvi > 10) {
         $(`#currentWeatherUV`).css(`background`, `#aa2020`)
     } else if (currentWeather.uvi > 5) {
@@ -66,9 +53,30 @@ function displayCurrentWeather(cityName, currentWeather) {
     } else {
         $(`#currentWeatherUV`).css(`background`, `#40aa20`)
     }
-    // console.log(`UV: `, currentWeather.uvi);
 
     $(`#cityWeatherContainer`).css(`display`, `block`)
+}
+
+function displayWeekForecast(forecastData) {
+    // future cards => 5 days, date, icon of weather conditions, temp, wind speed, humidity
+    //5 days
+    for (let index = 1; index <= 5; index++) {
+        //date
+        console.log(`date: `, moment().clone().add(index,'days').format(`M/D/YYYY`))
+        //icon of weather
+        console.log(`icon: `, `http://openweathermap.org/img/wn/${forecastData[index].weather[0].icon}.png`)
+        //temp
+        console.log(`temp: `, forecastData[index].temp.day)
+        //wind speed
+        console.log(`wind speed: `, forecastData[index].wind_speed)
+        //humdity
+        console.log(`humidity: `, forecastData[index].humidity)
+        createForecastCardElement()
+    }
+}
+
+function createForecastCardElement(date, icon, temp, wind, humidity) {
+    document.createElement(`div`);
 }
 
 callCurrentWeatherDataAPI(`new york`)
