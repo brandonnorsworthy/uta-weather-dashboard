@@ -55,10 +55,17 @@ function displayCurrentWeather(cityName, currentWeather) {
     $(`#currentWeatherHumidity`).html(currentWeather.humidity)
     // console.log(`Humidity: `, currentWeather.humidity);
     //windspeed
-    $(`#currentWeather`).html(currentWeather.wind_speed)
+    $(`#currentWeatherWind`).html(currentWeather.wind_speed)
     // console.log(`Wind Speed: `, currentWeather.wind_speed);
     //uv index
-    $(`#currentWeather`).html(currentWeather.uvi)
+    $(`#currentWeatherUV`).html(currentWeather.uvi)
+    if (currentWeather.uvi > 10) {
+        $(`#currentWeatherUV`).css(`background`, `#aa2020`)
+    } else if (currentWeather.uvi > 5) {
+        $(`#currentWeatherUV`).css(`background`, `#aa6a20`)
+    } else {
+        $(`#currentWeatherUV`).css(`background`, `#40aa20`)
+    }
     // console.log(`UV: `, currentWeather.uvi);
 
     $(`#cityWeatherContainer`).css(`display`, `block`)

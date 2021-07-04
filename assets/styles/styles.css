@@ -13,3 +13,20 @@ main {
 main h1 {
     font-weight: bold;
 }
+
+#currentWeatherContainer p {
+    font-size: larger;
+    font-weight: 600;
+}
+
+#currentWeatherIcon {
+    background: grey;
+    border-radius: 3rem;
+}
+
+#currentWeatherUV {
+    background: green;
+    color: #ffffff;
+    padding: 0 10px 0 10px;
+    border-radius: .4rem;
+}
