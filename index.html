@@ -4,12 +4,58 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/styles/styles.css">
     <link rel="shortcut icon" href="./assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="./assets/styles/styles.css">
     <title>Weather Dashboard</title>
 </head>
 <body>
+    <header class="row">
+        <h1 class="col-12 pb-4 pt-2">Weather Dashboard</h1>
+    </header>
+    <main class="row">
+        <div class="col-3 pl-4">
+            <!-- search -->
+            <div>
+                <!-- search for a city -->
+                <h1 class="row pl-3">Search for a City:</h1>
+                <div class="input-group">
+                    <div class="row">
+                        <input type="password" class="form-control" id="inputCity" placeholder="San Diego">
+                    </div>
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Confirm identity</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <!-- history of previous  -->
+            </div>
+        </div>
+        <div class="col-9">
+            <!-- city information -->
+            <div class="row pl-2 pt-3" style=" border:1px solid ">
+                <!-- current infor -->
+                <div class="col-12">
+                    <div class="row">
+                        <h1>
+                            <span id="currentWeatherName">Long City</span>
+                            &nbsp
+                            <span id="currentWeatherDate">12/31/2099</span>
+                        </h1>
+                        <img id="currentWeatherIcon" src="http://openweathermap.org/img/wn/10n.png" alt="city information tag">
+                    </div>
+                    <p class="row">Temp:&nbsp<span id="currentWeatherTemp">99.99</span>°F</p>
+                    <p class="row">Wind:&nbsp<span id="currentWeatherWindSpeed">9.99</span>&nbspMPH</p>
+                    <p class="row">Humidity:&nbsp<span id="currentWeatherHumidity">99</span>%</p>
+                    <p class="row">UV Index:&nbsp<span id="currentWeatherUV">11.49</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="./assets/js/script.js"></script>
 </body>
 </html>
