@@ -40,21 +40,28 @@ function displayCurrentWeather(cityName, currentWeather) {
     // console.log(`displayCurrentWeather: `, currentWeather);
     // current conditions => city name, date, icon of weather conditions, temp, humidity, wind speed, uv index
     //city name
-    console.log(`City Name: `, cityName);
+    $(`#currentWeatherName`).html(cityName);
+    // console.log(`City Name: `, cityName);
     //date
-    console.log(`Date: `, moment().format(`M/D/YYYY`));
+    $(`#currentWeatherDate`).html(moment().format(`M/D/YYYY`))
+    // console.log(`Date: `, moment().format(`M/D/YYYY`));
     //icon of weather conditions
-    // var imgEl = document.createElement(`img`);
-    // imgEl.setAttribute(`src`, `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}@2x.png`);
+    $(`#currentWeatherIcon`).attr(`src`, `http://openweathermap.org/img/wn/${currentWeather.weather[0].icon}.png`);
     // document.querySelector(`body`).appendChild(imgEl)
     //temp
-    console.log(`Temp: `, currentWeather.temp);
+    $(`#currentWeatherTemp`).html(currentWeather.temp)
+    // console.log(`Temp: `, currentWeather.temp);
     //humidity
-    console.log(`Humidity: `, currentWeather.humidity);
+    $(`#currentWeatherHumidity`).html(currentWeather.humidity)
+    // console.log(`Humidity: `, currentWeather.humidity);
     //windspeed
-    console.log(`Wind Speed: `, currentWeather.wind_speed);
+    $(`#currentWeather`).html(currentWeather.wind_speed)
+    // console.log(`Wind Speed: `, currentWeather.wind_speed);
     //uv index
-    console.log(`UV: `, currentWeather.uvi);
+    $(`#currentWeather`).html(currentWeather.uvi)
+    // console.log(`UV: `, currentWeather.uvi);
+
+    $(`#cityWeatherContainer`).css(`display`, `block`)
 }
 
 callCurrentWeatherDataAPI(`new york`)
