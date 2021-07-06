@@ -1,14 +1,17 @@
+// HTML Variables
+var citySearchFormEl = $(`#citySearchForm`);
+var searchInputEl = $(`#searchInput`);
+var foreCastContainer = $(`#foreCastContainer`)
 
 // Global Variables
-var openWeatherAppId = `2c4a921d55c896205bdca23294d0393d`
+var openWeatherAppId = `2c4a921d55c896205bdca23294d0393d`;
 
 // search => presented with current and future conditions
 // search history => when click presented with current and future conditions for that city
-
-//? current weather data
-//? https://api.openweathermap.org/data/2.5/weather?q=houston&units=imperial&appid=2c4a921d55c896205bdca23294d0393d
-//? one call
-//? https://api.openweathermap.org/data/2.5/onecall?q=houston&units=imperial&appid=2c4a921d55c896205bdca23294d0393d
+function searchInput(event) {
+    event.preventDefault()
+    callCurrentWeatherDataAPI(searchInputEl.val())
+}
 
 function callCurrentWeatherDataAPI(cityName) {
     var url = `https://api.openweathermap.org/data/2.5/weather?units=imperial&q=${cityName}&appid=${openWeatherAppId}`;
@@ -19,6 +22,9 @@ function callCurrentWeatherDataAPI(cityName) {
         cityName = data.name;
         // console.log(`callCurrentWeatherDataAPI: `, cityName);
         callOneCallAPI(cityName, data.coord.lon, data.coord.lat);
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
 
     return;
@@ -60,23 +66,22 @@ function displayCurrentWeather(cityName, currentWeather) {
 function displayWeekForecast(forecastData) {
     // future cards => 5 days, date, icon of weather conditions, temp, wind speed, humidity
     //5 days
+    foreCastContainer.html(``);
     for (let index = 1; index <= 5; index++) {
-        //date
-        console.log(`date: `, moment().clone().add(index,'days').format(`M/D/YYYY`))
-        //icon of weather
-        console.log(`icon: `, `http://openweathermap.org/img/wn/${forecastData[index].weather[0].icon}.png`)
-        //temp
-        console.log(`temp: `, forecastData[index].temp.day)
-        //wind speed
-        console.log(`wind speed: `, forecastData[index].wind_speed)
-        //humdity
-        console.log(`humidity: `, forecastData[index].humidity)
-        createForecastCardElement()
+        var divEl = $(`
+        <div class="foreCastCard">
+        <p style="font-weight: 800">${moment().clone().add(index,'days').format(`M/D/YYYY`)}</p>
+        <img src="http://openweathermap.org/img/wn/${forecastData[index].weather[0].icon}.png" alt="forcast day icon">
+        <p>Temp: ${forecastData[index].temp.day}°F</p>
+        <p>Wind: ${forecastData[index].wind_speed}MPH</p>
+        <p>Humidity: ${forecastData[index].humidity}%</p>
+        </div>`)
+        divEl.appendTo(foreCastContainer)
     }
 }
 
-function createForecastCardElement(date, icon, temp, wind, humidity) {
-    document.createElement(`div`);
+function init() {
+    citySearchFormEl.submit(searchInput)
 }
 
-callCurrentWeatherDataAPI(`new york`)
+init()
