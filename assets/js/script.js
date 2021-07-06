@@ -23,7 +23,7 @@ function callCurrentWeatherDataAPI(cityName) {
         cityName = data.name;
         // console.log(`callCurrentWeatherDataAPI: `, cityName);
         callOneCallAPI(cityName, data.coord.lon, data.coord.lat);
-        displayPreviousSearches(cityName);
+        displayPreviousSearches(cityName, false);
         })
     .catch(error => {
         console.error('Error:', error);
@@ -37,7 +37,6 @@ function callOneCallAPI(cityName, longitude, latitude) {
     fetch(url)
     .then(response => response.json())
     .then(data => {
-        console.log(`callOneCallAPI: `, data);
         displayCurrentWeather(cityName, data.current);
         displayWeekForecast(data.daily)
     });
@@ -82,17 +81,46 @@ function displayWeekForecast(forecastData) {
     }
 }
 
-function displayPreviousSearches(cityName) {
+function displayPreviousSearches(cityName, initialStart) {
+    var matchFound = false;
+    $('#previousSearches').children('').each(function(i) {
+        if (cityName == $(this).text()) {
+            matchFound = true;
+            return;
+        }
+    });
+    if (matchFound) {return;}
+
     var buttonEl = $(`<button type="button" class="col-12 mt-3 btn btn-secondary">${cityName}</button>`)
+    buttonEl.on(`click`, previousButtonClick);
     buttonEl.prependTo(previousSearchesEl);
+
+    if (!initialStart) {savePreviousData(cityName)};
+}
+
+function savePreviousData(cityName) {
+    tempItem = JSON.parse(localStorage.getItem(`previousSearches`))
+    console.log(`showing TempItem: `, tempItem)
+    if (tempItem != null) {
+        console.log(`adding new item: `, tempItem.concat(cityName));
+        localStorage.setItem(`previousSearches`, JSON.stringify(tempItem.concat(cityName)))
+    } else {
+        tempArr = [cityName];
+        console.log(`else saving: `, tempArr);
+        localStorage.setItem(`previousSearches`, JSON.stringify(tempArr))
+    }
+}
+
+function previousButtonClick(event) {
+    callCurrentWeatherDataAPI(event.target.innerHTML)
 }
 
 function init() {
     citySearchFormEl.submit(searchInput)
-    var tempArr = JSON.parse(localStorage.getItem(`previousSearches`))
+    tempArr = JSON.parse(localStorage.getItem(`previousSearches`))
     if (tempArr != null){
         for (let index = 0; index < tempArr.length; index++) {
-            displayPreviousSearches(displayPreviousSearches)
+            displayPreviousSearches(tempArr[index], true)
         }
     }
 }
