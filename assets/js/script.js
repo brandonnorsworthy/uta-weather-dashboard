@@ -7,13 +7,14 @@ var previousSearchesEl = $('#previousSearches');
 // Global Variables
 var openWeatherAppId = '2c4a921d55c896205bdca23294d0393d';
 
-// search => presented with current and future conditions
-// search history => when click presented with current and future conditions for that city
 function searchInput(event) {
     event.preventDefault()
     callCurrentWeatherDataAPI(searchInputEl.val())
 }
 
+/**
+ * @param  {} cityName
+ */
 function callCurrentWeatherDataAPI(cityName) {
     var url = `https://api.openweathermap.org/data/2.5/weather?units=imperial&q=${cityName}&appid=${openWeatherAppId}`;
     fetch(url)
@@ -32,6 +33,11 @@ function callCurrentWeatherDataAPI(cityName) {
     return;
 }
 
+/**
+ * @param  {} cityName
+ * @param  {} longitude
+ * @param  {} latitude
+ */
 function callOneCallAPI(cityName, longitude, latitude) {
     var url = `https://api.openweathermap.org/data/2.5/onecall?units=imperial&lon=${longitude}&lat=${latitude}&appid=${openWeatherAppId}`
     fetch(url)
@@ -42,6 +48,10 @@ function callOneCallAPI(cityName, longitude, latitude) {
     });
 }
 
+/**
+ * @param  {} cityName
+ * @param  {} currentWeather
+ */
 function displayCurrentWeather(cityName, currentWeather) {
     // current conditions => city name, date, icon of weather conditions, temp, humidity, wind speed, uv index
     $('#currentWeatherName').html(cityName); //city name
@@ -64,6 +74,9 @@ function displayCurrentWeather(cityName, currentWeather) {
     $('#cityWeatherContainer').css('display', 'block')
 }
 
+/**
+ * @param  {} forecastData
+ */
 function displayWeekForecast(forecastData) {
     // future cards => 5 days, date, icon of weather conditions, temp, wind speed, humidity
     //5 days
@@ -81,7 +94,12 @@ function displayWeekForecast(forecastData) {
     }
 }
 
+/**
+ * @param  {} cityName
+ * @param  {} initialStart
+ */
 function displayPreviousSearches(cityName, initialStart) {
+    // search history => when click presented with current and future conditions for that city
     var matchFound = false;
     $('#previousSearches').children('').each(function(i) {
         if (cityName == $(this).text()) {
@@ -98,6 +116,9 @@ function displayPreviousSearches(cityName, initialStart) {
     if (!initialStart) {savePreviousData(cityName)};
 }
 
+/**
+ * @param  {} cityName
+ */
 function savePreviousData(cityName) {
     tempItem = JSON.parse(localStorage.getItem('previousSearches'))
     console.log('showing TempItem: ', tempItem)
@@ -115,7 +136,7 @@ function previousButtonClick(event) {
     callCurrentWeatherDataAPI(event.target.innerHTML)
 }
 
-function init() {
+function init() { //declare events and load previous searches
     citySearchFormEl.submit(searchInput)
     tempArr = JSON.parse(localStorage.getItem('previousSearches'))
     if (tempArr != null){
