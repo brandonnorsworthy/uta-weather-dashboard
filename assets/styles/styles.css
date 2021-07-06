@@ -18,8 +18,25 @@ main h1 {
     background-color: #2d3e50;
 }
 
-#citySearchForm {
-    border-bottom: 1px solid;
+#citySearchForm button,
+#citySearchForm input {
+    font-size: 1.25em;
+}
+
+#previousSearches {
+    border-top: 1px solid;
+
+}
+
+#previousSearches button {
+    background-color: #a1a1a1;
+    color: #000000;
+    border: none;
+    font-size: 1.25em;
+}
+
+#previousSearches button:hover {
+    background-color: #797979;
 }
 
 #currentWeatherContainer p {
@@ -45,8 +62,8 @@ main h1 {
 
 #foreCastContainer div {
     color: #ffffff;
-    min-width: 8em;
+    min-width: 15%;
     padding-left: 0.5em;
     font-weight: 600;
-    font-size: larger;
+    font-size: 1.25em;
 }

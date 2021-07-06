@@ -1,7 +1,8 @@
 // HTML Variables
 var citySearchFormEl = $(`#citySearchForm`);
 var searchInputEl = $(`#searchInput`);
-var foreCastContainer = $(`#foreCastContainer`)
+var foreCastContainer = $(`#foreCastContainer`);
+var previousSearchesEl = $(`#previousSearches`);
 
 // Global Variables
 var openWeatherAppId = `2c4a921d55c896205bdca23294d0393d`;
@@ -22,7 +23,8 @@ function callCurrentWeatherDataAPI(cityName) {
         cityName = data.name;
         // console.log(`callCurrentWeatherDataAPI: `, cityName);
         callOneCallAPI(cityName, data.coord.lon, data.coord.lat);
-    })
+        displayPreviousSearches(cityName);
+        })
     .catch(error => {
         console.error('Error:', error);
     });
@@ -80,8 +82,19 @@ function displayWeekForecast(forecastData) {
     }
 }
 
+function displayPreviousSearches(cityName) {
+    var buttonEl = $(`<button type="button" class="col-12 mt-3 btn btn-secondary">${cityName}</button>`)
+    buttonEl.prependTo(previousSearchesEl);
+}
+
 function init() {
     citySearchFormEl.submit(searchInput)
+    var tempArr = JSON.parse(localStorage.getItem(`previousSearches`))
+    if (tempArr != null){
+        for (let index = 0; index < tempArr.length; index++) {
+            displayPreviousSearches(displayPreviousSearches)
+        }
+    }
 }
 
 init()
